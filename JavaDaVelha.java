@@ -7,11 +7,12 @@ public class JavaDaVelha {
         System.out.println("[ 00 ] [ 01 ] [ 02 ]\n[ 10 ] [ 11 ] [ 12 ]\n[ 20 ] [ 21 ] [ 22 ]\n");
         Scanner sc = new Scanner(System.in);
         Character[][] tabuleiro = new Character[3][3];
+        int i = 0;
 
-        jogadaPlayerUm(tabuleiro,sc);
-        mostraTabuleiro(tabuleiro);
-        jogadaPlayerDois(tabuleiro,sc);
-        mostraTabuleiro(tabuleiro);
+        while (i < 5) {
+            rounds(tabuleiro, sc);
+            i++;
+        }
 
 
 
@@ -37,32 +38,35 @@ public class JavaDaVelha {
             }
             System.out.println();
         }
+        System.out.println();
     }
     public static void jogadaPlayerUm(Character[][] tabuleiro, Scanner sc) {
-        System.out.println("Faça sua jogada! (Player1)");
+        System.out.println("Faça sua jogada! (Player1) ");
         String escolha1;
         while (true) {
             escolha1 = sc.nextLine();
             if (verificaJogada(tabuleiro, escolha1)) {
                 break;
             }
-            System.out.println("Ops! Jogada inválida");
+            System.out.println("Ops! Jogada inválida! Tente novamente.");
         }
         jogada(tabuleiro,escolha1,'X');
         System.out.println("Player 1 escolheu coordenada "+escolha1);
+        System.out.println();
     }
     public static void jogadaPlayerDois(Character[][] tabuleiro, Scanner sc) {
-        System.out.println("Faça sua jogada! (Player2)");
+        System.out.println("Faça sua jogada! (Player2) ");
         String escolha2;
         while (true) {
             escolha2 = sc.nextLine();
             if (verificaJogada(tabuleiro, escolha2)) {
                 break;
             }
-            System.out.println("Ops! Jogada Inválida!");
+            System.out.println("Ops! Jogada Inválida! Tente novamente.");
         }
         jogada(tabuleiro,escolha2,'O');
         System.out.println("Player 2 escolheu coordenada "+escolha2);
+        System.out.println();
     }
     public static void jogada(Character[][] tabuleiro, String coordenada, char XouO) {
         switch (coordenada) {
@@ -75,7 +79,7 @@ public class JavaDaVelha {
             case "20" -> tabuleiro[2][0] = XouO;
             case "21" -> tabuleiro[2][1] = XouO;
             case "22" -> tabuleiro[2][2] = XouO;
-            default -> System.out.println("Jogada Inválida!");
+            default -> System.out.println("Jogada Inválida!\n");
         }
     }
 
@@ -92,6 +96,13 @@ public class JavaDaVelha {
             case "22" -> tabuleiro[2][2] == null;
             default -> false;
         };
+    }
+
+    public static void rounds(Character[][] tabuleiro, Scanner sc) {
+        jogadaPlayerUm(tabuleiro,sc);
+        mostraTabuleiro(tabuleiro);
+        jogadaPlayerDois(tabuleiro,sc);
+        mostraTabuleiro(tabuleiro);
     }
 
 }
