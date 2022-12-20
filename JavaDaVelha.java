@@ -9,13 +9,10 @@ public class JavaDaVelha {
         Character[][] tabuleiro = new Character[3][3];
         int i = 0;
 
-        while (i < 5) {
+        while (i < 7) {
             rounds(tabuleiro, sc);
             i++;
         }
-
-
-
     }
     public static void mostraTabuleiro(Character[][] tabuleiro) {
         for (Character[] linha : tabuleiro) {
@@ -82,7 +79,6 @@ public class JavaDaVelha {
             default -> System.out.println("Jogada Inválida!\n");
         }
     }
-
     public static boolean verificaJogada(Character[][] tabuleiro, String coordenada) {
         return switch (coordenada) {
             case "00" -> tabuleiro[0][0] == null;
@@ -97,12 +93,23 @@ public class JavaDaVelha {
             default -> false;
         };
     }
-
     public static void rounds(Character[][] tabuleiro, Scanner sc) {
         jogadaPlayerUm(tabuleiro,sc);
+        confereFimDePartida(tabuleiro);
         mostraTabuleiro(tabuleiro);
         jogadaPlayerDois(tabuleiro,sc);
+        confereFimDePartida(tabuleiro);
         mostraTabuleiro(tabuleiro);
     }
-
+    public static boolean confereFimDePartida(Character[][] tabuleiro) {
+        for (int linha = 0; linha < tabuleiro.length; linha++) {
+            for (int coluna = 0; coluna < tabuleiro[linha].length; coluna++) {
+                if (tabuleiro[linha][coluna] == null) {
+                    return false;
+                }
+            }
+        }
+        System.out.println("Deu velha! Jogue novamente.\n");
+        return true;
+    }
 }
